@@ -1,0 +1,16 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.0",
+  "description": "evil robot with a twitter account",
+  "main": "bot.js",
+  "scripts": {
+    "start": "run bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Avery Wald",
+  "license": "ISC",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "twit": "^2.2.10"
+  }
+}
