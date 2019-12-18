@@ -47,7 +47,7 @@ var T = new Twit(config);
 
 tweet('so u tellin me a shrimp fried this rice')
 // every day - ms * sec * min * hr
-setInterval(tweet('so u tellin me a shrimp fried this rice'), 1000*60*60*24);
+// setInterval(tweet('so u tellin me a shrimp fried this rice'), 1000*60*60*24);
 
 // function browsePublic(stream) {
 //     stream = T.stream('public');
