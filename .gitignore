@@ -1,0 +1,10 @@
+# local config
+.vscode/
+node_modules/
+
+# api token script
+config.js
+# npm package info
+package.json
+# sample tweet
+tweet.json
