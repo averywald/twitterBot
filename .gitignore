@@ -2,9 +2,10 @@
 .vscode/
 node_modules/
 
+# typescript transpiled
+dist/
+
 # api token script
 config.js
 # npm package info
 package.json
-# sample tweet
-tweet.json

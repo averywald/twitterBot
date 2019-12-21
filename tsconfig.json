@@ -1,0 +1,12 @@
+{
+    // "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "Node",
+        "target": "ES5",
+        "rootDir": "src",
+        "outDir": "dist",
+        "removeComments": true,
+        "allowJs": true
+    }
+}

@@ -1,5 +1,5 @@
 var twit = require('twit')
-var config = require('./config')
+import * as config from './config'
 
 module.exports = {
     // print welcome message to console
@@ -12,7 +12,14 @@ module.exports = {
         console.log('           ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░');
         console.log('\n');
     },
+    // export an initialized twit instance
     init: () => {
         return new twit(config)
+    },
+    hurry: () => {
+        console.log('hurry')
+    },
+    hi: (str: string) => {
+        console.log(str)
     }
 }

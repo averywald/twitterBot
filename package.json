@@ -2,14 +2,16 @@
   "name": "twitterbot",
   "version": "1.0.0",
   "description": "evil robot with a twitter account",
-  "main": "bot.js",
+  "main": "dist/app.js",
+  "type": "module",
   "scripts": {
-    "start": "run bot.js",
+    "start": "sh build.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Avery Wald",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.12.21",
     "file-system": "^2.2.2",
     "twit": "^2.2.10"
   }

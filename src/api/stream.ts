@@ -1,19 +1,10 @@
 var s = require('../config/setup')
 
-let stream = s.setup.stream('user')
-
 module.exports = {
-    
+    stream: s.setup.stream('user'),
+    browsePublic: () => {}
 }
 
-// every day - ms * sec * min * hr
-// setInterval(tweet('so u tellin me a shrimp fried this rice'), 1000*60*60*24);
-
-function browsePublic(stream) {
-    // s = stream.stream('public');
-
-    // search('machine learning', 10);
-}
 
 // any time someone follows the bot
 // stream.on('follow', followBack(event));

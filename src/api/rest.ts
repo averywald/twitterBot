@@ -1,10 +1,10 @@
 var twit = require('twit')
-var setup = require('../config/setup.ts')
+var setup = require('../config/setup')
 
 let T = setup.init()
 
 module.exports = {
-    search: (query) => {
+    search: (query: string) => {
         T.get('search/tweets', {
             q: query
         }, (err, data, response) => {
