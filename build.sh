@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-:'
+: '
 this is the build script.
 it will transpile the typescript files in ./src/
 and output them into ./dist/

@@ -1,130 +1,73 @@
-var twit = require('twit')
 var setup = require('../config/setup')
 
+// initialize twit instance
 let T = setup.init()
 
 module.exports = {
-    search: (query: string) => {
+    // search for tweets matching query string
+    search: (query: string): void => {
+        // twit GET request
         T.get('search/tweets', {
             q: query
         }, (err, data, response) => {
             console.log(data)
         })
+    },
+    // get a specific tweet by ID string
+    searchById: (tweetId: string): void => {
+        // twit GET request
+        T.get('statuses/show', {
+            id: tweetId
+        }, (err, data, response) => {
+
+            // deep printing to find useful data
+            const stuff = Object.values(data.extended_entities.video_info)
+            for (let x of stuff) {
+                console.log(x)
+            }
+
+            // console.log(data.extended_entities)
+
+            // const keys = Object.values(data)
+            // for (let k of keys) {
+            //     console.log(k)
+            // }
+        })
+    },
+    // post a tweet composed of input text argument
+    tweet: (text: string): void => {
+        // twit POST request
+        T.post('statuses/update', {
+            status: text
+        }, (err, data, response) => {
+            // print POST request metadata
+            console.log(`error: ${err}`)
+            console.log(`data: ${data}`)
+            console.log(`response: ${response}`)
+            // confimation message
+            console.log(`\ntweeted: ${text}\n`)
+        })
+    },
+    getFollowers: (user: string): void => {
+        T.get('followers/list', {
+            screen_name: user
+        }, (err, followers, response) => {
+            console.log(`error: ${err}`)
+            console.log(`followers: ${followers}`)
+            console.log(`response: ${response}`)
+        })
+    },
+    follow: (user: string): void => {
+        T.post('friendships/create', {
+            screen_name: user
+        }, (error, data, response) => {
+            console.log("following '" + user + "'...\n");
+            if (error) {
+                console.log("oops, something goofed:\n");
+                console.log(error);
+            } else {
+                console.log("followed " + user + "'\n");
+            }
+        })  
     }
 }
-
-// function restAPIMenu() {
-//     console.log("\nRest API Options:\n");
-//     console.log(
-//         "\nTweet\nReply\nSearch\nFollow\nGet Followers\n"
-//     );
-//     var selection = prompt('Type an option: ');
-//     var fn = window[selection];
-//     if (typeof fn === 'function') fn();
-// }
-
-//
-//  tweet
-//
-// function tweet(txt) {
-//     T.post('statuses/update', { status: txt }, function (error, data, response) {
-//         console.log("\ntweeting '" + txt + "'...\n");
-//         if (error) {
-//             console.log("oops, something goofed:\n");
-//             console.log(error);
-//         } else {
-//             console.log('tweeted "' + txt + '"\n');
-//             console.log(data);
-//         }
-//     })
-// }
-
-//
-//  reply to tweet
-//
-// function reply(txt, tweetId) {
-//     var params = {
-//         status: txt,
-//         id: tweetId
-//     };
-//     T.post('statuses/update', params, function (error, data, response) {
-//         console.log("\ntweeting '" + txt + "'...\n");
-//         if (error) {
-//             console.log("oops, something goofed:\n");
-//             console.log(error);
-//         } else {
-//             console.log('tweeted "' + txt + '"\n');
-//             console.log(data);
-//         }
-//     })
-// }
-
-//
-//  search twitter for all tweets with parameters
-//
-// function search(hashtag, tweetCount) {
-//     // search parameters
-//     var params = {
-//         q: '#' + hashtag,
-//         count: tweetCount
-//     };
-
-//     T.get('search/tweets', params, function (error, tweets, response) {
-//         console.log("\ngsearching for tweets...\n");
-//         if (error) {
-//             console.log("oops, something goofed:\n");
-//             console.log(error);
-//         } else {
-//             console.log("tweet search results...\n");
-//             console.log(tweets);
-//             var results = {
-//                 tweetId: tweets.id,
-//                 username: tweets.screen_name,
-//                 followers: tweets.followers,
-//                 retweets: tweets.retweets,
-//                 favorites: tweets.favorites
-//             };
-//             return results;
-//         }
-//     })
-// }
-
-//
-//  get the list of user id's that follow @tweetinassbot
-//
-// function getFollowers() {
-//     var params = {
-//         screen_name: 'tweetinassbot'
-//     };
-
-//     T.get('followers/list', params, function (error, followers, response) {
-//         console.log("\ngetting followers...\n");
-//         if (error) {
-//             console.log("oops, something goofed:\n");
-//             console.log(error);
-//         } else {
-//             var followList = followers;
-//             console.log("followers:\n");
-//             console.log(followers);
-//             return followers;
-//         }
-//     })
-// }
-
-//
-//  follow user
-//
-// function follow(follower) {
-//     params = {
-//         screen_name: follower
-//     };
-//     T.post('friendships/create', params, function (error, data, response) {
-//         console.log("following '" + params.screen_name + "'...\n");
-//         if (error) {
-//             console.log("oops, something goofed:\n");
-//             console.log(error);
-//         } else {
-//             console.log("followed " + params.screen_name + "'\n");
-//         }
-//     })  
-// }

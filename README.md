@@ -9,3 +9,4 @@ namely, where the transpiled files are piped out to
 - `package.json` specifies node execution and dependencies
     - running `npm start` to start the bot will call `build.sh`,
     as listed under the `"start"` object property
+- `build.sh` will transpile typescript modules and run the bot, all rolled into one

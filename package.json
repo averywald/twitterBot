@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "sh build.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node dist/app.js"
   },
   "author": "Avery Wald",
   "license": "ISC",
