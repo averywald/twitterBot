@@ -1,17 +1,20 @@
 var setup = require('../config/setup')
+var utility = require('../tools/utility')
 
 // initialize twit instance
 let T = setup.init()
 
 module.exports = {
     // search for tweets matching query string
-    search: (query: string): void => {
+    search: (query: string): object => {
         // twit GET request
-        T.get('search/tweets', {
+        let obj = T.get('search/tweets', {
             q: query
         }, (err, data, response) => {
-            console.log(data)
+            // console.log(data)
+            return data
         })
+        return obj
     },
     // get a specific tweet by ID string
     searchById: (tweetId: string): void => {
@@ -19,19 +22,8 @@ module.exports = {
         T.get('statuses/show', {
             id: tweetId
         }, (err, data, response) => {
-
-            // deep printing to find useful data
-            const stuff = Object.values(data.extended_entities.video_info)
-            for (let x of stuff) {
-                console.log(x)
-            }
-
-            // console.log(data.extended_entities)
-
-            // const keys = Object.values(data)
-            // for (let k of keys) {
-            //     console.log(k)
-            // }
+            let str = `tweet${data.id}.json`
+            utility.export(str, data)
         })
     },
     // post a tweet composed of input text argument

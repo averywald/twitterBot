@@ -1,6 +1,7 @@
 # local config
 .vscode/
 node_modules/
+extras/
 
 # typescript transpiled
 dist/
