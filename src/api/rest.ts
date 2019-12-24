@@ -22,7 +22,9 @@ module.exports = {
         T.get('statuses/show', {
             id: tweetId
         }, (err, data, response) => {
-            let str = `tweet${data.id}.json`
+            // build JSON object file name from twitter API ID
+            let str = `extras/tweet${data.id}.json`
+            // export JSON to ./extras/
             utility.export(str, data)
         })
     },
@@ -32,21 +34,17 @@ module.exports = {
         T.post('statuses/update', {
             status: text
         }, (err, data, response) => {
-            // print POST request metadata
-            console.log(`error: ${err}`)
-            console.log(`data: ${data}`)
-            console.log(`response: ${response}`)
-            // confimation message
-            console.log(`\ntweeted: ${text}\n`)
+            // log request response
+            utility.printResponse(err, data, response)
         })
     },
     getFollowers: (user: string): void => {
         T.get('followers/list', {
             screen_name: user
         }, (err, followers, response) => {
-            console.log(`error: ${err}`)
-            console.log(`followers: ${followers}`)
-            console.log(`response: ${response}`)
+            // log request response
+            utility.printResponse(err, followers, response)
+            utility.export(`extras/followers.json`, followers)
         })
     },
     follow: (user: string): void => {

@@ -2,4 +2,6 @@
 var rest = require('./api/rest')
 
 // sample calls
-rest.searchById('1208881399249412102')
+// rest.searchById('1208881399249412102')
+
+rest.getFollowers('tweetinassbot')
