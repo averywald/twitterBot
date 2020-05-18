@@ -1,7 +1,7 @@
 # local config
 .vscode/
 node_modules/
-extras/
+dataCache/
 
 # typescript transpiled
 dist/

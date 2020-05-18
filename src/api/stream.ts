@@ -1,3 +1,6 @@
+// stream.ts
+    // live-update stream API functions
+
 var s = require('../config/setup')
 
 module.exports = {

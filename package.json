@@ -11,8 +11,11 @@
   "author": "Avery Wald",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^12.12.21",
+    "@types/node": "^12.12.39",
     "file-system": "^2.2.2",
-    "twit": "^2.2.10"
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.2"
   }
 }
