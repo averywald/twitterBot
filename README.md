@@ -23,7 +23,6 @@ export default {
     access_token_secret: '...',
 };
 ```
-- To Do: include file generation in the build script ??
 
 The chain is as follows
 - `src/config/config.js` (Root)
