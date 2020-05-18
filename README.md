@@ -16,7 +16,7 @@ namely, where the transpiled files are piped out to
 Twitter OAuth keys are required to run the bot, so you will need to provide them.
 There is a dependency chain that should stem from `src/config/config.js`, so that's the file to be added.  Here is an example:
 ```javascript
-module.exports = {
+export default {
     consumer_key: '...',
     consumer_secret: '...',
     access_token: '...',
