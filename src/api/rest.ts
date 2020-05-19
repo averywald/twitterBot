@@ -1,31 +1,34 @@
 // rest.ts
     // REST API functions
 
-// var setup = require('../config/setup')
-import { welcome, init } from '../config/setup.js'
-// var utility = require('../tools/utility')
-import { exportData, printResponse } from '../tools/utility.js'
+import * as setup from '../config/setup.js'
+import * as utility from '../tools/utility.js'
 
 // initialize twit instance
-let T = init()
+let T = setup.init()
 
-export function test() {
-    console.log("test requre link");
-}
-
-// search for tweets matching query string
-export function search(query: string): object {
+/**
+ * @todo wrap in promise / convert to async/await protocol
+ * 
+ * @param query string to search for in tweets
+ * @returns Object
+ */
+export function search(query: string): Object {
     // twit GET request
     let obj = T.get('search/tweets', {
         q: query
     }, (err, data, response) => {
-        // console.log(data)
         return data
     })
     return obj
 }
 
-// get a specific tweet by ID string
+/**
+ * @todo eliminate side-effects ???
+ * 
+ * @param tweetId string identifier of a single tweet
+ * @returns nothing, SIDE EFFECT
+ */
 export function searchById(tweetId: string): void {
     // twit GET request
     T.get('statuses/show', {
@@ -34,33 +37,59 @@ export function searchById(tweetId: string): void {
         // build JSON object file name from twitter API ID
         let str = `dataCache/tweet${data.id}.json`
         // export JSON to ../dataCache/
-        exportData(str, data)
+        utility.exportData(str, data)
     })
 }
 
-// post a tweet composed of input text argument
+/**
+ * @todo eliminate side-effects ???
+ * 
+ * @param text string to tweet
+ * @returns nothing, SIDE EFFECT function
+ */
 export function tweet(text: string): void {
     // twit POST request
     T.post('statuses/update', {
         status: text
     }, (err, data, response) => {
         // log request response
-        printResponse(err, data, response)
+        utility.printResponse(err, data, response)
     })
 }
 
-export function getFollowers(user: string): Object {
-    let data = T.get('followers/list', {
-        screen_name: user
-    }, (err, followers, response) => {
-        // log request response
-        printResponse(err, followers, response)
-        // export JSON object to ../dataCache/
-        exportData(`dataCache/${user}followers.json`, followers)
+/**
+ * @param user twitter 'screen_name' to fetch follower list
+ * @param willExport triggers the function to export data to external file
+ * @returns Promise<Object> containing follower data as JSON
+ */
+export async function getFollowers(user: string, willExport: Boolean): Promise<Object> {
+    // store data in promise & wait for it to complete
+    const data = await new Promise((resolve, reject) => {
+        // twitter API call
+        T.get('followers/list', { screen_name: user }, (err, res, fol) => {
+            // reject request error(s)
+            if (err) reject(err)
+            // resolve successful request promise
+            else {
+                // if function flagged to export API data
+                if (willExport) {
+                    // export JSON object to ../dataCache/
+                    utility.exportData(`dataCache/${user}followers.json`, fol)
+                }
+                // resolve the promise
+                resolve(fol)
+            }
+        })
     })
     return data
 }
 
+/**
+ * @todo eliminate side-effects ??
+ * 
+ * @param user twitter 'screen_name' string of user to follow
+ * @returns nothing
+ */
 export function follow(user: string): void {
     T.post('friendships/create', {
         screen_name: user

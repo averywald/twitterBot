@@ -2,9 +2,12 @@
     // miscellaneous system-helper functions
 
 import fs from 'file-system'
-import path from 'path'
 
-// write data to external file
+/**
+ * @param fileName relative file path to write to
+ * @param data data to write to the file
+ * @returns nothing
+ */
 export function exportData(fileName: string, data: object): void {
     fs.open(fileName, 'wx', (err) => {
         if (err) {
@@ -20,22 +23,20 @@ export function exportData(fileName: string, data: object): void {
     })
 }
 
-// calculate the absolute path for a file to be in compliance with Node readFile
-// export function getAbsolutePath(relativeFilePath: string): string {
-//     let p = path.join(__dirname, '..', )
-// }
-
-// print API request response to console
+/**
+ * @param err error arising from API request failure
+ * @param data data encapsulated
+ * @param resp HTTP request response
+ */
 export function printResponse(err, data, resp): void {
     console.log(`error: ${err}`)
     console.log(`data: ${data}`)
     console.log(`response: ${resp}`)
 }
 
-// read in data from an external file
-export function readData(fileName: string): Object {
-    return fs.readFile(fileName, (err, data) => {
-        if (err) throw err
-        return JSON.parse(data)
-    })
-}
+// export function readData(fileName: string): Object {
+//     return fs.readFile(fileName, (err, data) => {
+//         if (err) throw err
+//         return JSON.parse(data)
+//     })
+// }

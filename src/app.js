@@ -1,9 +1,9 @@
 // app.js
     // NodeJS program entry point scripts
-import { test, getFollowers } from './api/rest.js'
-import { readData } from './tools/utility.js'
 
-// sample calls
-// rest.searchById('1208881399249412102')
-// let fol = getFollowers('averywald')
-// console.log(fol)
+import * as rest from './api/rest.js'
+import * as utility from './tools/utility.js'
+
+// const out = rest.getFollowers('tweetinassbot', false).then((data) => { 
+//     console.log(data) 
+// })
