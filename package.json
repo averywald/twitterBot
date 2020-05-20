@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "sh build.sh",
-    "test": "node dist/app.js"
+    "test-dist": "node dist/app.js",
+    "test-cache": "sh test/cacheManage.sh"
   },
   "author": "Avery Wald",
   "license": "ISC",

@@ -8,19 +8,24 @@ import * as utility from '../tools/utility.js'
 let T = setup.init()
 
 /**
- * @todo wrap in promise / convert to async/await protocol
+ * @todo account for all parts of HTTP request response
  * 
  * @param query string to search for in tweets
  * @returns Object
  */
-export function search(query: string): Object {
-    // twit GET request
-    let obj = T.get('search/tweets', {
-        q: query
-    }, (err, data, response) => {
-        return data
+export async function search(query: string): Promise<Object> {
+    const data = await new Promise((resolve, reject) => {
+        T.get('search/tweets', {
+            q: query
+        }, (err, data, response) => {
+            if (err) reject(err)
+            else {
+                resolve(data)
+                return data
+            }
+        })
     })
-    return obj
+    return data
 }
 
 /**
@@ -35,7 +40,7 @@ export function searchById(tweetId: string): void {
         id: tweetId
     }, (err, data, response) => {
         // build JSON object file name from twitter API ID
-        let str = `dataCache/tweet${data.id}.json`
+        let str = `cache/tweet${data.id}.json`
         // export JSON to ../dataCache/
         utility.exportData(str, data)
     })
@@ -74,7 +79,7 @@ export async function getFollowers(user: string, willExport: Boolean): Promise<O
                 // if function flagged to export API data
                 if (willExport) {
                     // export JSON object to ../dataCache/
-                    utility.exportData(`dataCache/${user}followers.json`, fol)
+                    utility.exportData(`cache/${user}followers.json`, fol)
                 }
                 // resolve the promise
                 resolve(fol)
