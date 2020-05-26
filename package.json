@@ -18,5 +18,16 @@
   },
   "devDependencies": {
     "typescript": "^3.9.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/averyWald/twitterBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/averyWald/twitterBot/issues"
+  },
+  "homepage": "https://github.com/averyWald/twitterBot#readme"
 }

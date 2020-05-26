@@ -28,4 +28,4 @@ The chain is as follows
 - `src/config/config.js` (Root)
 - `src/config/setup.ts`
 - `src/api/[rest.ts, stream.ts]`
-- `src/app.js` (Leaf)
+- `src/app.js` (Leaf / Node Entry-Point)

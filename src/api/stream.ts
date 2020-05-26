@@ -1,12 +1,12 @@
 // stream.ts
     // live-update stream API functions
 
-var s = require('../config/setup')
+import * as setup from '../config/setup.js'
 
-module.exports = {
-    stream: s.setup.stream('user'),
-    browsePublic: () => {}
-}
+// module.exports = {
+//     stream: setup.init(),
+//     browsePublic: () => {}
+// }
 
 
 // any time someone follows the bot

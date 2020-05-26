@@ -71,7 +71,7 @@ export async function getFollowers(user: string, willExport: Boolean): Promise<O
     // store data in promise & wait for it to complete
     const data = await new Promise((resolve, reject) => {
         // twitter API call
-        T.get('followers/list', { screen_name: user }, (err, res, fol) => {
+        T.get('followers/list', { screen_name: user }, (err, fol, res) => {
             // reject request error(s)
             if (err) reject(err)
             // resolve successful request promise
